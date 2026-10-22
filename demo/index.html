@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>案例画廊 · vivus studio</title>
+<meta name="description" content="三个真实案例的导出文件：描边绘制、路径变形、图标过渡。全部由导出器生成，非手工 SVG。">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #14100c; --panel: #1c1511; --panel-2: #221a14; --line: #35261a;
+    --text: #f1e5d7; --dim: #c2ad98; --muted: #8d7760; --amber: #f6b26b; --terra: #d4703f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background:
+      radial-gradient(circle at 50% -10%, #241a12 0%, var(--bg) 60%);
+    color: var(--text);
+    font: 14px/1.65 "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--amber); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header {
+    max-width: 1080px; margin: 0 auto; padding: 46px 24px 10px;
+    display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  }
+  header .mark {
+    font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--amber); font-weight: 650;
+  }
+  header h1 { font-size: 26px; margin: 0; font-weight: 600; letter-spacing: -.01em; }
+  header p { margin: 0; color: var(--muted); font-size: 13px; }
+  header .nav { margin-left: auto; display: flex; gap: 14px; font-size: 13px; }
+  main { max-width: 1080px; margin: 0 auto; padding: 18px 24px 80px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,.02), transparent), var(--panel);
+    border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .stage {
+    aspect-ratio: 1; display: grid; place-items: center; position: relative;
+    background:
+      radial-gradient(circle at 50% 20%, #241a12, #17110d 75%);
+    border-bottom: 1px solid var(--line);
+  }
+  .stage::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(246,178,107,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(246,178,107,.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+  }
+  .stage object { width: 66%; height: 66%; position: relative; }
+  .body { padding: 16px 18px 18px; display: grid; gap: 10px; }
+  .body h2 { margin: 0; font-size: 16px; font-weight: 600; }
+  .body h2 small { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 8px; letter-spacing: .04em; }
+  .body p { margin: 0; color: var(--dim); font-size: 13px; }
+  .spec { display: flex; gap: 14px; flex-wrap: wrap; font-family: ui-monospace, Consolas, monospace; font-size: 11.5px; color: var(--muted); }
+  .spec b { color: var(--amber); font-weight: 600; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+  .links a {
+    border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px;
+    font-size: 12px; color: var(--dim); background: var(--panel-2);
+  }
+  .links a:hover { color: var(--amber); border-color: #6b4a2c; text-decoration: none; }
+  section.notes { margin-top: 42px; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .note { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .note h3 { margin: 0 0 6px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .note p { margin: 0; color: var(--dim); font-size: 13px; }
+  footer { max-width: 1080px; margin: 0 auto; padding: 0 24px 60px; color: var(--muted); font-size: 12px; }
+  @media (max-width: 640px) { header { padding-top: 28px; } header .nav { margin-left: 0; } }
+</style>
+</head>
+<body>
+<header>
+  <span class="mark">vivus studio</span>
+  <h1>案例画廊</h1>
+  <p>下面三个文件由导出器跑真实场景生成，不是手写的 SVG。</p>
+  <nav class="nav">
+    <a href="../studio/index.html">打开编辑器</a>
+    <a href="../index.html">项目首页</a>
+    <a href="upstream.html">上游 vivus 演示</a>
+  </nav>
+</header>
+
+<main>
+  <div class="grid">
+    <article class="card">
+      <div class="stage"><object type="image/svg+xml" data="case-draw.svg" aria-label="描边绘制动画"></object></div>
+      <div class="body">
+        <h2>描边绘制 <small>stroke reveal</small></h2>
+        <p>五条描边按 delayed 策略错峰落墨，外框先起笔，辐条随后，收尾带一点 0.94→1 的回弹。</p>
+        <div class="spec">
+          <span><b>61</b> 帧</span><span><b>5</b> 描边轨</span><span><b>34.1</b> KB</span>
+        </div>
+        <div class="links">
+          <a href="case-draw.svg">独立 SVG</a>
+          <a href="case-draw.html">HTML 播放器</a>
+          <a href="../studio/index.html?case=draw">在编辑器打开</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><object type="image/svg+xml" data="case-morph.svg" aria-label="路径变形动画"></object></div>
+      <div class="body">
+        <h2>路径变形 <small>path morph</small></h2>
+        <p>圆 → 方 → 星 → 圆。圆弧先拆成三次贝塞尔，段数补齐后按最小代价重定起点，避免"麻花"扭转。</p>
+        <div class="spec">
+          <span><b>73</b> 帧</span><span><b>1</b> 几何轨</span><span><b>30.6</b> KB</span>
+        </div>
+        <div class="links">
+          <a href="case-morph.svg">独立 SVG</a>
+          <a href="case-morph.html">HTML 播放器</a>
+          <a href="../studio/index.html?case=morph">在编辑器打开</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="stage"><object type="image/svg+xml" data="case-icon.svg" aria-label="图标过渡动画"></object></div>
+      <div class="body">
+        <h2>图标过渡 <small>icon transition</small></h2>
+        <p>菜单三条横线 → 关闭叉号。左边 3 条、右边 2 条，多出的那条收缩到自身重心后消失。</p>
+        <div class="spec">
+          <span><b>34</b> 帧</span><span><b>3</b> 图标轨</span><span><b>6.8</b> KB</span>
+        </div>
+        <div class="links">
+          <a href="case-icon.svg">独立 SVG</a>
+          <a href="case-icon.html">HTML 播放器</a>
+          <a href="../studio/index.html?case=icon">在编辑器打开</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <section class="notes">
+    <div class="note">
+      <h3>两种导出目标</h3>
+      <p><b>SVG</b> 用 SMIL 驱动，单个文件、零 JavaScript、零外部请求；<b>HTML</b> 把 SVG 和一条时间轴滑杆内联，可以拖动擦洗，同样离线可用。</p>
+    </div>
+    <div class="note">
+      <h3>缩放不失真</h3>
+      <p>描边用 <code>pathLength="1"</code> 归一化，dash 长度随图形一起缩放。把 SVG 放到 4 倍尺寸下重测，墨迹包围盒实测 3.98 倍。</p>
+    </div>
+    <div class="note">
+      <h3>和预览逐帧一致</h3>
+      <p>导出与编辑器走同一个采样函数，回归脚本会把两边栅格化成 40×40 墨迹掩码比对，三个案例的 IoU 分别是 0.993 / 0.990 / 1.000。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  文件由 <code>node tools/build-demo.mjs</code> 重新生成 · 上游 <a href="https://github.com/maxwellito/vivus">maxwellito/vivus</a>（MIT）
+</footer>
+</body>
+</html>

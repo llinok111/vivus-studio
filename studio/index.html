@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vivus studio · SVG 动效时间轴</title>
+<meta name="description" content="路径变形、描边绘制、图标过渡的关键帧编辑器，导出可独立运行的 SVG。">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="head">
+    <div class="brand"><b>vivus studio</b><span>svg motion timeline</span></div>
+    <div class="case-tabs" id="cases" role="tablist" aria-label="案例"></div>
+    <div class="spacer"></div>
+    <div class="transport">
+      <button class="icon-btn primary" id="btn-play" title="播放 / 暂停（空格）" aria-label="播放">▶</button>
+      <button class="icon-btn" id="btn-stop" title="回到起点" aria-label="回到起点">■</button>
+      <button class="icon-btn" id="btn-loop" title="循环" aria-label="循环" aria-pressed="true">↻</button>
+      <span class="time-read" id="time-read">0.00 / 0.00 s</span>
+      <select id="speed" class="btn small" style="width:auto" aria-label="速度">
+        <option value="0.25">0.25×</option>
+        <option value="0.5">0.5×</option>
+        <option value="1" selected>1×</option>
+        <option value="2">2×</option>
+      </select>
+    </div>
+  </header>
+
+  <aside class="side left">
+    <div class="section">
+      <h2>案例</h2>
+      <div class="note" id="case-note">—</div>
+    </div>
+    <div class="section">
+      <h2>轨道</h2>
+      <div class="track-list" id="track-list"></div>
+    </div>
+    <div class="section">
+      <h2>路径兼容性</h2>
+      <dl class="kv" id="compat"></dl>
+    </div>
+    <div class="section">
+      <h2>关键帧操作</h2>
+      <div class="row2">
+        <button class="btn small" id="btn-add-kf">＋ 打点</button>
+        <button class="btn small danger" id="btn-del-kf">删除所选</button>
+      </div>
+      <p class="note" style="margin-top:10px">
+        「打点」把当前时刻的采样值固化成关键帧；对变形轨道来说，等于把此刻的中间形态固定下来。
+      </p>
+    </div>
+  </aside>
+
+  <main class="stage-wrap" id="stage-wrap">
+    <div class="stage-badge" id="stage-badge">—</div>
+    <div class="stage"><svg id="stage-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"></svg></div>
+    <div class="stage-hint">空格 播放 / 暂停 · ← → 逐帧</div>
+  </main>
+
+  <aside class="side right">
+    <div class="section">
+      <h2>检查器</h2>
+      <div id="inspector"><p class="note">选中一个关键帧。</p></div>
+    </div>
+    <div class="section">
+      <h2>中断实验</h2>
+      <div class="field">
+        <label for="int-track">作用轨道</label>
+        <select id="int-track"></select>
+      </div>
+      <div id="int-value-field"></div>
+      <div class="row2">
+        <div class="field">
+          <label for="int-duration">过渡时长 ms</label>
+          <input id="int-duration" type="number" value="320" min="60" max="2000" step="20">
+        </div>
+        <div class="field">
+          <label for="int-at">中断时刻 ms</label>
+          <input id="int-at" type="number" value="0" min="0" step="10">
+        </div>
+      </div>
+      <label class="check" style="margin-bottom:8px">
+        <input type="checkbox" id="int-velocity" checked> 保持速度（数值轨道）
+      </label>
+      <button class="btn accent" id="btn-interrupt">在游标处中断</button>
+      <button class="btn small" id="btn-stress" style="margin-top:6px">连续中断 ×5 并测量接缝</button>
+      <div class="readout" id="int-report" style="margin-top:8px">等待中断。</div>
+    </div>
+    <div class="section">
+      <h2>导出</h2>
+      <div class="row2">
+        <div class="field">
+          <label for="exp-fps">采样 fps</label>
+          <input id="exp-fps" type="number" value="30" min="10" max="60" step="1">
+        </div>
+        <div class="field">
+          <label for="exp-loop">循环</label>
+          <select id="exp-loop"><option value="1" selected>是</option><option value="0">否</option></select>
+        </div>
+      </div>
+      <div class="row2">
+        <button class="btn small" id="btn-export-svg">导出 SVG</button>
+        <button class="btn small" id="btn-export-html">导出 HTML</button>
+      </div>
+      <div class="export-out" id="export-out">尚未导出。</div>
+      <div style="display:flex;gap:6px;margin-top:6px">
+        <button class="btn small" id="btn-download" disabled>下载</button>
+        <button class="btn small" id="btn-copy" disabled>复制</button>
+      </div>
+    </div>
+  </aside>
+
+  <section class="timeline">
+    <div class="tl-corner">timeline</div>
+    <div class="tl-ruler" id="ruler"></div>
+    <div class="tl-rows" id="rows"></div>
+  </section>
+</div>
+
+<script src="./app.bundle.js"></script>
+</body>
+</html>

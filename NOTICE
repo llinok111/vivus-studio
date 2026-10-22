@@ -1,0 +1,53 @@
+vivus studio
+Copyright (c) 2026 llinok111
+
+This product is a derivative work of vivus
+(https://github.com/maxwellito/vivus), Copyright (c) 2014 maxwellito and
+contributors, licensed under the MIT License. The full upstream text is in
+LICENSE. The upstream commit history is preserved in this repository.
+
+Upstream files kept byte-for-byte identical
+-------------------------------------------
+  src/vivus.js
+  src/pathformer.js
+  src/_build.js
+  dist/vivus.js
+  dist/vivus.min.js
+  test/unit/vivus.spec.js
+  test/unit/pathformer.spec.js
+  test/unit.setup.js
+  test/karma.conf.js
+  assets/*, .github/*, CONTRIBUTING.md, hacks.md, bower.json
+
+Files added by this fork
+------------------------
+  src/motion/**                     geometry, timeline, scene, stroke, icon, exporters
+  studio/**                         editor application
+  demo/**                           gallery, generated exports, upstream demo page
+  docs/**                           usage, API, architecture, limitations
+  test/spec/**                      node:test suites (ESM, outside the upstream karma glob)
+  test/dom/**                       headless Chrome end-to-end suite
+  test/dom/**                       headless Chrome end-to-end suite (CDP)
+  tools/**                          png decoder, static server, demo builder
+  README.md, NOTICE                 this documentation
+
+Files modified by this fork
+---------------------------
+  package.json     renamed to vivus-studio, scripts and metadata added
+  index.html       replaced with a landing page. The original upstream demo is
+                   preserved verbatim at demo/upstream.html (only asset paths
+                   and the GitHub link were adjusted so it runs from that
+                   directory).
+  .gitignore       build and test artefacts added
+
+Design notes on the additions
+-----------------------------
+The geometry pipeline is an independent implementation written against the
+SVG 1.1 specification (appendix F.6.5 for arc conversion, de Casteljau for
+subdivision). It does not vendor or copy code from flubber, GSAP, anime.js or
+any other morphing library. The easing functions are the standard Robert
+Penner style formulations; the cubic-bezier solver is the usual Newton
+iteration over the Bernstein basis.
+
+Third-party runtime dependencies: none. Build and test tooling only:
+esbuild (MIT), karma/jasmine (MIT, inherited from upstream), uglify-js (BSD-2).

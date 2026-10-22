@@ -1,35 +1,66 @@
 {
-  "name": "vivus",
-  "version": "0.4.6",
-  "description": "JavaScript library to make drawing animation on SVG",
-  "main": "dist/vivus.js",
-  "scripts": {
-    "test": "karma start test/karma.conf.js",
-    "serve": "python -m SimpleHTTPServer 8844",
-    "lint": "./node_modules/eslint/bin/eslint.js src test",
-    "build": "npm run build-raw && npm run build-min",
-    "build-raw": "node src/_build.js > dist/vivus.js",
-    "build-min": "uglifyjs dist/vivus.js -o dist/vivus.min.js -c -m --source-map"
-  },
+  "name": "vivus-studio",
+  "version": "0.5.0",
+  "description": "Keyframe timeline for SVG stroke, path morph and icon transitions, built on vivus. Exports standalone SVG that plays without JavaScript.",
+  "license": "MIT",
+  "author": "llinok111",
+  "contributors": [
+    "maxwellito (vivus, upstream)"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/maxwellito/vivus.git"
+    "url": "https://github.com/llinok111/vivus-studio.git"
   },
-  "author": "maxwellito",
-  "license": "MIT",
+  "homepage": "https://llinok111.github.io/vivus-studio/studio/",
   "bugs": {
-    "url": "https://github.com/maxwellito/vivus/issues"
+    "url": "https://github.com/llinok111/vivus-studio/issues"
   },
-  "homepage": "https://github.com/maxwellito/vivus",
-  "engine": {
-    "node": ">=0.10.22"
+  "keywords": [
+    "svg",
+    "animation",
+    "morph",
+    "stroke",
+    "keyframe",
+    "timeline",
+    "icon-transition",
+    "smil"
+  ],
+  "main": "dist/vivus.js",
+  "module": "src/motion/index.js",
+  "exports": {
+    ".": "./src/motion/index.js",
+    "./vivus": "./src/vivus.js"
+  },
+  "files": [
+    "src",
+    "dist",
+    "studio",
+    "docs",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "scripts": {
+    "test": "npm run test:unit && npm run test:upstream && npm run test:dom",
+    "test:unit": "node --test \"test/spec/*.test.js\"",
+    "test:upstream": "karma start test/karma.conf.js --single-run --browsers ChromeHeadless",
+    "test:dom": "node test/dom/run.mjs",
+    "build": "npm run build:studio && npm run build:lib && npm run build:vivus",
+    "build:studio": "esbuild studio/app.js --bundle --format=iife --target=chrome110 --minify=false --outfile=studio/app.bundle.js",
+    "build:lib": "esbuild src/motion/index.js --bundle --format=esm --target=chrome110 --outfile=dist/svg-motion.mjs",
+    "build:vivus": "node src/_build.js > dist/vivus.js",
+    "serve": "node tools/serve.mjs 4173",
+    "verify": "node test/dom/run.mjs --verbose"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "eslint": "^5.15.3",
     "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.2",
     "karma-jasmine": "^2.0.1",
     "uglify-js": "^3.5.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

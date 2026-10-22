@@ -1,6 +1,10 @@
-coverage/
 node_modules/
+coverage/
+test/.artifacts/
+.tmp/
+*.log
+dist/vivus.min.js.map
 .DS_Store
 .idea
 yarn.lock
-dist/vivus.min.js.map
+shots/
