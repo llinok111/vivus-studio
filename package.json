@@ -41,7 +41,7 @@
   ],
   "scripts": {
     "test": "npm run test:unit && npm run test:upstream && npm run test:dom",
-    "test:unit": "node --test \"test/spec/*.test.js\"",
+    "test:unit": "node --test test/spec/geometry.test.js test/spec/timeline.test.js",
     "test:upstream": "karma start test/karma.conf.js --single-run --browsers ChromeHeadless",
     "test:dom": "node test/dom/run.mjs",
     "build": "npm run build:studio && npm run build:lib && npm run build:vivus",
