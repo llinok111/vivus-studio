@@ -3,6 +3,8 @@
 **把 vivus 的「一次性描边动画」扩展成关键帧时间轴工作台。**
 描边绘制 · 路径变形 · 图标过渡，一条时间轴编排，导出**不依赖 JavaScript** 的独立 SVG。
 
+[![CI](https://github.com/llinok111/vivus-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/llinok111/vivus-studio/actions/workflows/ci.yml) 
+
 [▶ 打开编辑器](https://llinok111.github.io/vivus-studio/studio/) · [案例画廊](https://llinok111.github.io/vivus-studio/demo/) · [上游 vivus 演示](https://llinok111.github.io/vivus-studio/demo/upstream.html)
 
 > 这是 [maxwellito/vivus](https://github.com/maxwellito/vivus)（MIT，15.4k★）的二次开发版本。
