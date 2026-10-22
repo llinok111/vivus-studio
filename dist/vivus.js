@@ -1,7 +1,7 @@
 /**
- * vivus - JavaScript library to make drawing animation on SVG
- * @version v0.4.6
- * @link https://github.com/maxwellito/vivus
+ * vivus-studio - Keyframe timeline for SVG stroke, path morph and icon transitions, built on vivus. Exports standalone SVG that plays without JavaScript.
+ * @version v0.5.0
+ * @link https://llinok111.github.io/vivus-studio/studio/
  * @license MIT
  */
 

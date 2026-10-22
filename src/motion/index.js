@@ -32,4 +32,4 @@ export { extractIcon, planIconTransition, normalizeIconPair, collapsePath, ICON_
 export { exportSmil } from './export/smil.js';
 export { exportHtml } from './export/html.js';
 
-export const VERSION = '0.1.0';
+export const VERSION = '0.5.0';

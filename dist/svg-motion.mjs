@@ -2249,7 +2249,7 @@ function escapeHtml(s) {
 }
 
 // src/motion/index.js
-var VERSION = "0.1.0";
+var VERSION = "0.5.0";
 export {
   EASINGS,
   EASING_NAMES,
